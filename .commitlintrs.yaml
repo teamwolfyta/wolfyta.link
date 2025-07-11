@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://github.com/KeisukeYamashita/commitlint-rs/releases/latest/download/schema.json
+rules:
+  footers-empty:
+    level: warning
+  type:
+    options:
+      # keep-sorted start
+      - build
+      - chore
+      - ci
+      - docs
+      - feat
+      - fix
+      - perf
+      - refactor
+      - revert
+      - style
+      - test
+      # keep-sorted end
+  type-format:
+    level: error
+    format: ^[a-z]+$

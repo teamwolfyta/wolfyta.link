@@ -1,0 +1,35 @@
+#:schema https://raw.githubusercontent.com/evilmartians/lefthook/master/schema.json
+
+assert_lefthook_installed = true
+
+[[pre-commit.jobs]]
+name = "deadnix"
+glob = "*.nix"
+run = "deadnix --fail {staged_files}"
+
+[[pre-commit.jobs]]
+name = "clippy"
+run = "cargo clippy --locked -- --deny clippy::all"
+
+[[pre-commit.jobs]]
+name = "editorconfig-checker"
+run = "editorconfig-checker"
+
+[[pre-commit.jobs]]
+name = "statix"
+run = "statix check --format errfmt"
+
+[[pre-commit.jobs]]
+name = "taplo"
+glob = "*.toml"
+run = "o=(taplo lint {staged_files}) || echo -n $o"
+
+[[pre-commit.jobs]]
+interactive = true
+name = "treefmt"
+run = "treefmt"
+stage_fixed = true
+
+[[prepare-commit-msg.jobs]]
+name = "commitlint-rs"
+run = "commitlint --edit ./.git/COMMIT_EDITMSG"
